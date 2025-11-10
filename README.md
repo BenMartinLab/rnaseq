@@ -81,7 +81,7 @@ Cheatsheet for tmux [https://tmuxcheatsheet.com](https://tmuxcheatsheet.com).
 Set genome as a variable.
 
 ```shell
-genome=hg38-ensembl-115
+genome=hg38
 ```
 
 From the tmux session, start the pipeline using the following command.
@@ -113,7 +113,7 @@ set -e
 
 export PATH=~/projects/def-bmartin/scripts/rnaseq:$PATH
 
-genome=hg38-ensembl-115
+genome=hg38
 
 run-nfcore.sh \
     -profile alliance_canada \
@@ -159,7 +159,7 @@ srun --pty --jobid $slurm_job_id /bin/bash
 Set genome as a variable.
 
 ```shell
-genome=hg38-ensembl-115
+genome=hg38
 ```
 
 Run the pipeline.
