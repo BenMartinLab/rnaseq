@@ -103,6 +103,7 @@ You can still run the pipeline by creating a bash script (named rnaseq.sh for ex
 > Replace `samplesheet.csv` and `genome` value with the actual samplesheet and genome names. 
 
 ```shell
+#!/bin/bash
 #SBATCH --account=def-bmartin
 #SBATCH --time=2-00:00:00
 #SBATCH --cpus-per-task=1
