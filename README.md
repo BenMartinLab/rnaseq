@@ -4,6 +4,14 @@ This repository contains scripts to analyse RNA-seq data using [nf-core pipeline
 
 To install the scripts on Alliance Canada servers and download genomes, see [INSTALL.md](#INSTALL.md)
 
+### Steps
+
+1. [Choose server to use](#Choose-server-to-use)
+2. [Transfer data to scratch](#Transfer-data-to-scratch)
+3. [Add RNA-seq scripts folder to your PATH](#Add-RNA-seq-scripts-folder-to-your-PATH)
+4. [Run the nf-core pipeline on Rorqual or Narval](#Run-the-nf-core-pipeline-on-Rorqual-or-Narval)
+5. [Run the nf-core pipeline on Fir](#Run-the-nf-core-pipeline-on-Fir)
+
 ## Choose server to use
 
 While you can run nf-core pipelines on any general servers, you will find it easier to run nf-core on Rorqual or Narval.
@@ -34,7 +42,7 @@ For Rorqual server, use
 export PATH=~/links/projects/def-bmartin/scripts/rnaseq:$PATH
 ```
 
-## Run the pipeline on Rorqual or Narval
+## Run the nf-core pipeline on Rorqual or Narval
 
 ### Create tmux session
 
@@ -93,69 +101,11 @@ From the tmux session, start the pipeline using the following command.
 run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
 
-## Run the pipeline on Fir
+## Run the nf-core pipeline on Fir
 
-Please use Rorqual or Narval when possible because running nf-core pipelines on Cedar is much less trivial because the login node virtual memory limit cannot be changed.
+Please use Rorqual or Narval when possible because running nf-core pipelines on Fir is much less trivial because the login node virtual memory limit cannot be changed.
 
-You can still run the pipeline by creating a bash script (named rnaseq.sh for example) file containing the following.
-
-> [!IMPORTANT]
-> Replace `samplesheet.csv` and `genome` value with the actual samplesheet and genome names. 
-
-```shell
-#!/bin/bash
-#SBATCH --account=def-bmartin
-#SBATCH --time=2-00:00:00
-#SBATCH --cpus-per-task=1
-#SBATCH --mem=4G
-
-# Stop if an error is encountered.
-set -e
-
-export PATH=~/projects/def-bmartin/scripts/rnaseq:$PATH
-
-genome=hg38
-
-run-nfcore.sh \
-    -profile alliance_canada \
-    --input samplesheet.csv \
-    --outdir output \
-    --fasta $genome.fa \
-    --gtf $genome.gtf
-```
-
-Then submit the script for execution:
-
-```shell
-sbatch rnaseq.sh
-```
-
-The main issue of running the script this way is that the log file will be difficult to read.
-
-### Alternative using the wait script
-
-While this will not be recommended by anyone working at Alliance Canada, you can cheat a compute node to act in a similar way as Rorqual/Narval's login nodes.
-
-To get this working, you need to start the `wait.sh` script.
-
-```shell
-sbatch --job-name=nfcore-rnaseq --cpus-per-task=1 --mem=4G --time=2-00:00:00 wait.sh
-```
-
-Once the job is running (check using `squeue -u $USER`), start a tmux session.
-
-```shell
-tmux new -s rnaseq
-```
-
-Connect to the compute node that is running the `wait.sh` script.
-
-> [!IMPORTANT]
-> Replace `$slurm_job_id` with the actual job id - obtained using `squeue -u $USER`.
-
-```shell
-srun --pty --jobid $slurm_job_id /bin/bash
-```
+You can still run the pipeline by using `sbatch` to run the nf-core pipeline on a compute node. The main issue of running the nf-core pipeline this way is that the output file will be difficult to read.
 
 Set genome as a variable.
 
@@ -163,11 +113,11 @@ Set genome as a variable.
 genome=hg38
 ```
 
-Run the pipeline.
+Submit job using `sbatch`.
 
 > [!IMPORTANT]
 > Replace `$samplesheet.csv` with the actual samplesheet.
 
 ```shell
-run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+sbatch run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
