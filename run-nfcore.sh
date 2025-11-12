@@ -5,9 +5,8 @@
 #SBATCH --mem=4G
 #SBATCH --output=run-nfcore-%A.out
 
-script_path=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-source "${script_path}/nfcore-modules.sh"
-source "${script_path}/nfcore-env/bin/activate"
+script_path=${RNASEQ_SCRIPTS:-.}
 
+echo "Launching nf-core pipeline ${script_path}/nf-core-rnaseq_3.19.0/3_19_0"
 nextflow run "${script_path}/nf-core-rnaseq_3.19.0/3_19_0/" \
     "$@"

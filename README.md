@@ -8,7 +8,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 
 1. [Choose server to use](#Choose-server-to-use)
 2. [Transfer data to scratch](#Transfer-data-to-scratch)
-3. [Add RNA-seq scripts folder to your PATH](#Add-RNA-seq-scripts-folder-to-your-PATH)
+3. [Prepare working environment](#Prepare-working-environment)
 4. [Run the nf-core pipeline on Rorqual or Narval](#Run-the-nf-core-pipeline-on-Rorqual-or-Narval)
 5. [Run the nf-core pipeline on Fir](#Run-the-nf-core-pipeline-on-Fir)
 
@@ -21,7 +21,7 @@ While you can run nf-core pipelines on any general servers, you will find it eas
 You will need to transfer the following files on the server in the `scratch` folder.
 
 * FASTQ files.
-* Genome files (FASTA and GTF). See [Genomes](#https://github.com/BenMartinLab/genomes).
+* Genome files (FASTA and GTF). See [Genomes](https://github.com/BenMartinLab/genomes).
 * Samplesheet file. See [Samplesheet for RNA-seq pipeline](#https://nf-co.re/rnaseq/3.19.0/docs/usage/#samplesheet-input)
 * Any additional files that are needed for your analysis.
 
@@ -30,7 +30,9 @@ There are many ways to transfer data to the server. Here are some suggestions.
 * Use an FTP software like [WinSCP](https://winscp.net) (Windows), [Cyberduck](https://cyberduck.io) (Mac), [FileZilla](https://filezilla-project.org).
 * Use command line tools like `rsync` or `scp`.
 
-## Add RNA-seq scripts folder to your PATH
+## Prepare working environment
+
+Add RNA-seq scripts folder to your PATH.
 
 ```shell
 export PATH=~/projects/def-bmartin/scripts/rnaseq:$PATH
@@ -40,6 +42,12 @@ For Rorqual server, use
 
 ```shell
 export PATH=~/links/projects/def-bmartin/scripts/rnaseq:$PATH
+```
+
+Load modules and virtual environment.
+
+```shell
+source nfcore-init.sh
 ```
 
 ## Run the nf-core pipeline on Rorqual or Narval
