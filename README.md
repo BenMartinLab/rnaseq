@@ -129,3 +129,18 @@ Submit job using `sbatch`.
 ```shell
 sbatch run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
+
+## Computing scale factors
+
+Set spike as a variable, if spike-in was used.
+
+```shell
+spike=dm6
+```
+
+> [!IMPORTANT]
+> Replace `$samplesheet.csv` with the actual samplesheet. Remove --spike_fasta parameter if no spike-in was used.
+
+```shell
+sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salmon/scale-factors.txt --samplesheet $samplesheet.csv --spike_fasta $spike.fa --mean
+```
