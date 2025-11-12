@@ -97,7 +97,7 @@ Cheatsheet for tmux [https://tmuxcheatsheet.com](https://tmuxcheatsheet.com).
 Set genome as a variable.
 
 ```shell
-genome=hg38
+genome=hg38-spike-dm6
 ```
 
 From the tmux session, start the pipeline using the following command.
@@ -118,7 +118,7 @@ You can still run the pipeline by using `sbatch` to run the nf-core pipeline on 
 Set genome as a variable.
 
 ```shell
-genome=hg38
+genome=hg38-spike-dm6
 ```
 
 Submit job using `sbatch`.
