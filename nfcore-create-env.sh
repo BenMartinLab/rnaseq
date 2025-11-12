@@ -7,7 +7,7 @@ then
   module load python/3.13
 fi
 
-script_path=$(dirname "$(readlink -f "$0")")
+script_path=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 cd "$script_path" || { echo "Folder $script_path does not exists"; exit 1; }
 
 python -m venv nfcore-env
