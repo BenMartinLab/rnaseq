@@ -35,5 +35,5 @@ Run the pipeline.
 > Replace `$samplesheet.csv` with the actual samplesheet.
 
 ```shell
-run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```

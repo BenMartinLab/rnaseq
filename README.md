@@ -107,7 +107,7 @@ From the tmux session, start the pipeline using the following command.
 > Replace `$samplesheet.csv` with the actual samplesheet.
 
 ```shell
-run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
 
 ## Run the nf-core pipeline on Fir
@@ -128,7 +128,7 @@ Submit job using `sbatch`.
 > Replace `$samplesheet.csv` with the actual samplesheet.
 
 ```shell
-sbatch run-nfcore.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
 
 ## Computing scale factors
