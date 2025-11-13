@@ -51,6 +51,22 @@ Load modules and virtual environment.
 source nfcore-init.sh
 ```
 
+Set additional variables.
+
+```shell
+samplesheet=samplesheet.csv
+```
+
+```shell
+genome=hg38-spike-dm6
+```
+
+Set spike variable, if spike-in was used.
+
+```shell
+spike=dm6
+```
+
 ## Run the nf-core pipeline on Rorqual or Narval
 
 ### Create tmux session
@@ -95,19 +111,10 @@ Cheatsheet for tmux [https://tmuxcheatsheet.com](https://tmuxcheatsheet.com).
 
 ### Run the pipeline
 
-Set genome as a variable.
-
-```shell
-genome=hg38-spike-dm6
-```
-
 From the tmux session, start the pipeline using the following command.
 
-> [!IMPORTANT]
-> Replace `$samplesheet.csv` with the actual samplesheet.
-
 ```shell
-nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
 
 ## Run the nf-core pipeline on Fir
@@ -116,32 +123,12 @@ Please use Rorqual or Narval when possible because running nf-core pipelines on 
 
 You can still run the pipeline by using `sbatch` to run the nf-core pipeline on a compute node. The main issue of running the nf-core pipeline this way is that the output file will be difficult to read.
 
-Set genome as a variable.
-
 ```shell
-genome=hg38-spike-dm6
-```
-
-Submit job using `sbatch`.
-
-> [!IMPORTANT]
-> Replace `$samplesheet.csv` with the actual samplesheet.
-
-```shell
-sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet.csv --outdir output --fasta $genome.fa --gtf $genome.gtf
+sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf
 ```
 
 ## Computing scale factors
 
-Set spike as a variable, if spike-in was used.
-
 ```shell
-spike=dm6
-```
-
-> [!IMPORTANT]
-> Replace `$samplesheet.csv` with the actual samplesheet. Remove --spike_fasta parameter if no spike-in was used.
-
-```shell
-sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salmon/scale-factors.txt --samplesheet $samplesheet.csv --spike_fasta $spike.fa --mean
+sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salmon/scale-factors.txt --samplesheet $samplesheet --spike_fasta $spike.fa --mean
 ```
