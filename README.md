@@ -11,6 +11,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 3. [Prepare working environment](#Prepare-working-environment)
 4. [Run the nf-core pipeline on Rorqual or Narval](#Run-the-nf-core-pipeline-on-Rorqual-or-Narval)
 5. [Run the nf-core pipeline on Fir](#Run-the-nf-core-pipeline-on-Fir)
+6. [Computing scale factors](#Computing-scale-factors)
 
 ## Choose server to use
 
