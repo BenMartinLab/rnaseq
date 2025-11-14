@@ -58,6 +58,10 @@ samplesheet=samplesheet.csv
 ```
 
 ```shell
+samples_array=$(awk -F ',' 'NR > 1 && !seen[$1] {ln++; seen[$1]++} END {print "0-"ln-1}' "$samplesheet")
+```
+
+```shell
 genome=hg38-spike-dm6
 ```
 
@@ -131,4 +135,18 @@ sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir o
 
 ```shell
 sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salmon/scale-factors.txt --samplesheet $samplesheet --spike_fasta $spike.fa --mean
+```
+
+## Genome coverage
+
+Genome coverage using scale factors based on sequencing depth. 
+
+```shell
+sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --genome $genome.chrom.sizes
+```
+
+Genome coverage using spike-in scale factors.
+
+```shell
+sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --genome $genome.chrom.sizes --scales_column 5 --suffix .spike_scaled
 ```

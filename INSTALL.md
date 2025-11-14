@@ -73,3 +73,10 @@ bash $rnaseq_folder/nfcore-create-env.sh
 ```shell
 bash $rnaseq_folder/nfcore-download-containers.sh
 ```
+
+### Download bedGraphToBigWig
+
+```shell
+wget https://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64.v479/bedGraphToBigWig
+chmod 755 bedGraphToBigWig
+```
