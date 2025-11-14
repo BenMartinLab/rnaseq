@@ -39,13 +39,13 @@ usage() {
   echo "  --scales: File containing scale factors (default: \$output/scale-factors.txt)"
   echo "  --scales_column: File containing scale factors (default: 3)"
   echo "  --suffix: Output file suffix (default: .depth_scaled)"
-  exit 1
 }
 
 # Parsing arguments.
 if ! valid_args=$(getopt -o i:s:g:o:S:c:f:h --long index:,samplesheet:,genome:,output:,scales:,scales_column:,suffix:,help -- "$@")
 then
   usage
+  exit 1
 fi
 
 eval set -- "$valid_args"
@@ -82,6 +82,7 @@ do
         ;;
     -h | --help)
         usage
+        exit 0
         ;;
     --) shift;
         break
@@ -99,31 +100,37 @@ if ! [[ "$index" =~ ^[0-9]+$ ]]
 then
   >&2 echo "Error: --index parameter '$index' is not an integer."
   usage
+  exit 1
 fi
 if ! [[ -f "$samplesheet" ]]
 then
   >&2 echo "Error: --samplesheet file parameter '$samplesheet' does not exists."
   usage
+  exit 1
 fi
 if ! [[ -f "$genome" ]]
 then
   >&2 echo "Error: --genome file parameter '$genome' does not exists."
   usage
+  exit 1
 fi
 if ! [[ -d "$output" ]]
 then
   >&2 echo "Error: --output folder parameter '$output' does not exists."
   usage
+  exit 1
 fi
 if ! [[ -f "$scales" ]]
 then
   >&2 echo "Error: --scales file parameter '$scales' does not exists."
   usage
+  exit 1
 fi
 if ! [[ "$scales_column" =~ ^[0-9]+$ ]]
 then
   >&2 echo "Error: --scales_column parameter '$scales_column' is not an integer."
   usage
+  exit 1
 fi
 
 
