@@ -158,5 +158,5 @@ sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --ge
 To split BAM files between main genome and spike-in genome, use the following command.
 
 ```shell
-sbatch --array=$samples_array split-bam.sh --samplesheet $samplesheet --spike spike.fa
+sbatch --array=$samples_array split-bam.sh --samplesheet $samplesheet --spike $spike.fa
 ```
