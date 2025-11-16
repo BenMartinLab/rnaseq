@@ -13,6 +13,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 5. [Run the nf-core pipeline on Fir](#Run-the-nf-core-pipeline-on-Fir)
 6. [Computing scale factors](#Computing-scale-factors)
 7. [Genome coverage](#Genome-coverage)
+8. [Split BAM (Optional)](#Split-BAM-Optional)
 
 ## Choose server to use
 
@@ -150,4 +151,12 @@ Genome coverage using spike-in scale factors.
 
 ```shell
 sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --genome $genome.chrom.sizes --scales_column 5 --suffix .spike_scaled
+```
+
+## Split BAM (Optional)
+
+To split BAM files between main genome and spike-in genome, use the following command.
+
+```shell
+sbatch --array=$samples_array split-bam.sh --samplesheet $samplesheet --spike spike.fa
 ```
