@@ -32,13 +32,14 @@ usage() {
   echo
   echo "Usage: genome-coverage.sh [--index int] [--samplesheet samplesheet.csv] [--genome hg38.chrom.sizes] " \
        "[--output output/star_salmon] [--scales scale-factors.txt] [--scales_column 3] [--suffix .depth_scaled]"
-  echo "  --index: Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
-  echo "  --samplesheet: Samplesheet file (default: samplesheet.csv)"
-  echo "  --genome: Genome chromosome sizes file (default: hg38.chrom.sizes)"
-  echo "  --output: Output folder where BAM files are located (default: output/star_salmon)"
-  echo "  --scales: File containing scale factors (default: \$output/scale-factors.txt)"
-  echo "  --scales_column: File containing scale factors (default: 3)"
-  echo "  --suffix: Output file suffix (default: .depth_scaled)"
+  echo "  --index (-i): Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
+  echo "  --samplesheet (-s): Samplesheet file (default: samplesheet.csv)"
+  echo "  --genome (-g): Genome chromosome sizes file (default: hg38.chrom.sizes)"
+  echo "  --output (-o): Output folder where BAM files are located (default: output/star_salmon)"
+  echo "  --scales (-S): File containing scale factors (default: \$output/scale-factors.txt)"
+  echo "  --scales_column (-c): File containing scale factors (default: 3)"
+  echo "  --suffix (-f): Output file suffix (default: .depth_scaled)"
+  echo "  --help (-h): Show this help"
 }
 
 # Parsing arguments.
