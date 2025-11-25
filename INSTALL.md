@@ -3,8 +3,8 @@
 ### Steps
 
 1. [Installing of the scripts](#Installing-of-the-scripts)
-    1. [Change directory to `projects` folder](#Change-directory-to-projects-folder)
-    2. [Clone repository](#Clone-repository)
+   1. [Change directory to `projects` folder](#Change-directory-to-projects-folder)
+   2. [Clone repository](#Clone-repository)
 2. [Updating scripts](#Updating-scripts)
 3. [After installing or updating the scripts](#After-installing-or-updating-the-scripts)
    1. [Creating python virtual environment for nf-core](#Creating-python-virtual-environment-for-nf-core)
