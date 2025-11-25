@@ -25,7 +25,7 @@ You will need to transfer the following files on the server in the `scratch` fol
 
 * FASTQ files.
 * Genome files (FASTA and GTF). See [Genomes](https://github.com/BenMartinLab/genomes).
-* Samplesheet file. See [Samplesheet for RNA-seq pipeline](#https://nf-co.re/rnaseq/3.19.0/docs/usage/#samplesheet-input)
+* Samplesheet file. See [Samplesheet for RNA-seq pipeline](https://nf-co.re/rnaseq/3.19.0/docs/usage/#samplesheet-input)
 * Any additional files that are needed for your analysis.
 
 There are many ways to transfer data to the server. Here are some suggestions.
