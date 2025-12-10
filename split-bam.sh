@@ -31,89 +31,79 @@ spike_suffix=.spike
 # Usage function
 usage() {
   echo
-  echo "Usage: split-bam.sh [--index int] [--samplesheet samplesheet.csv] [--spike dm6.fa] " \
-       "[--output output/star_salmon] [--suffix .main] [--spike_suffix .spike]"
-  echo "  --index (-i): Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
-  echo "  --samplesheet (-s): Samplesheet file (default: samplesheet.csv)"
-  echo "  --spike (-k): Genome file of spike-in organism (default: dm6.fa)"
-  echo "  --output (-o): Output folder where BAM files are located (default: output/star_salmon)"
-  echo "  --suffix (-f): Output file suffix appended to sample name (default: .main)"
-  echo "  --spike_suffix (-F): Output file suffix for spike-in BAM appended to sample name (default: .spike)"
-  echo "  --threads (-t): Number of threads (default: 1 or SLURM_CPUS_PER_TASK if present)"
-  echo "  --help (-h): Show this help"
+  echo "Usage: split-bam.sh [-i int] [-s samplesheet.csv] [-k dm6.fa] " \
+       "[-o output/star_salmon] [-f .main] [-F .spike] [-t int]"
+  echo "  -i: Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
+  echo "  -s: Samplesheet file (default: samplesheet.csv)"
+  echo "  -k: Genome file of spike-in organism (default: dm6.fa)"
+  echo "  -o: Output folder where BAM files are located (default: output/star_salmon)"
+  echo "  -f: Output file suffix appended to sample name (default: .main)"
+  echo "  -F: Output file suffix for spike-in BAM appended to sample name (default: .spike)"
+  echo "  -t: Number of threads (default: 1 or SLURM_CPUS_PER_TASK if present)"
+  echo "  -h: Show this help"
 }
 
 # Parsing arguments.
-if ! valid_args=$(getopt -o i:s:k:o:f:F:t:h --long index:,samplesheet:,spike:,output:,suffix:,spike_suffix:,threads:,help -- "$@")
-then
-  usage
-  exit 1
-fi
-
-eval set -- "$valid_args"
-while true
-do
-  case "$1" in
-    -i | --index)
-        index=$2
-        shift 2
-        ;;
-    -s | --samplesheet)
-        samplesheet=$2
-        shift 2
-        ;;
-    -k | --spike)
-        spike=$2
-        shift 2
-        ;;
-    -o | --output)
-        output=$2
-        shift 2
-        ;;
-    -f | --suffix)
-        suffix=$2
-        shift 2
-        ;;
-    -F | --spike_suffix)
-        spike_suffix=$2
-        shift 2
-        ;;
-    -t | --threads)
-        threads=$2
-        shift 2
-        ;;
-    -h | --help)
-        usage
-        exit 0
-        ;;
-    --) shift;
-        break
-        ;;
+while getopts 'i:s:k:o:f:F:t:h' OPTION; do
+  case "$OPTION" in
+    i)
+       index="$OPTARG"
+       ;;
+    s)
+       samplesheet="$OPTARG"
+       ;;
+    k)
+       spike="$OPTARG"
+       ;;
+    o)
+       output="$OPTARG"
+       ;;
+    f)
+       suffix="$OPTARG"
+       ;;
+    F)
+       spike_suffix="$OPTARG"
+       ;;
+    t)
+       threads="$OPTARG"
+       ;;
+    h)
+       usage
+       exit 0
+       ;;
+    :)
+       usage
+       exit 1
+       ;;
+    ?)
+       usage
+       exit 1
+       ;;
   esac
 done
 
 # Validating arguments.
 if ! [[ "$index" =~ ^[0-9]+$ ]]
 then
-  >&2 echo "Error: --index parameter '$index' is not an integer."
+  >&2 echo "Error: -i parameter '$index' is not an integer."
   usage
   exit 1
 fi
 if ! [[ -f "$samplesheet" ]]
 then
-  >&2 echo "Error: --samplesheet file parameter '$samplesheet' does not exists."
+  >&2 echo "Error: -s file parameter '$samplesheet' does not exists."
   usage
   exit 1
 fi
 if ! [[ -f "$spike" ]]
 then
-  >&2 echo "Error: --spike file parameter '$spike' does not exists."
+  >&2 echo "Error: -k file parameter '$spike' does not exists."
   usage
   exit 1
 fi
 if ! [[ -d "$output" ]]
 then
-  >&2 echo "Error: --output folder parameter '$output' does not exists."
+  >&2 echo "Error: -o folder parameter '$output' does not exists."
   usage
   exit 1
 fi

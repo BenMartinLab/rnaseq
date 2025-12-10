@@ -164,18 +164,18 @@ Genome coverage using scale factors based on sequencing depth.
 
 ```shell
 sbatch --array=$samples_array genome-coverage.sh \
-    --samplesheet $samplesheet \
-    --genome $genome.chrom.sizes
+    -s $samplesheet \
+    -g $genome.chrom.sizes
 ```
 
 Genome coverage using spike-in scale factors.
 
 ```shell
 sbatch --array=$samples_array genome-coverage.sh \
-    --samplesheet $samplesheet \
-    --genome $genome.chrom.sizes \
-    --scales_column 5 \
-    --suffix .spike_scaled
+    -s $samplesheet \
+    -g $genome.chrom.sizes \
+    -c 5 \
+    -f .spike_scaled
 ```
 
 ## Split BAM (Optional)
@@ -184,6 +184,6 @@ To split BAM files between main genome and spike-in genome, use the following co
 
 ```shell
 sbatch --array=$samples_array split-bam.sh \
-    --samplesheet $samplesheet \
-    --spike $spike.fa
+    -s $samplesheet \
+    -k $spike.fa
 ```

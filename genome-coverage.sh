@@ -30,64 +30,54 @@ suffix=.depth_scaled
 # Usage function
 usage() {
   echo
-  echo "Usage: genome-coverage.sh [--index int] [--samplesheet samplesheet.csv] [--genome hg38.chrom.sizes] " \
-       "[--output output/star_salmon] [--scales scale-factors.txt] [--scales_column 3] [--suffix .depth_scaled]"
-  echo "  --index (-i): Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
-  echo "  --samplesheet (-s): Samplesheet file (default: samplesheet.csv)"
-  echo "  --genome (-g): Genome chromosome sizes file (default: hg38.chrom.sizes)"
-  echo "  --output (-o): Output folder where BAM files are located (default: output/star_salmon)"
-  echo "  --scales (-S): File containing scale factors (default: \$output/scale-factors.txt)"
-  echo "  --scales_column (-c): File containing scale factors (default: 3)"
-  echo "  --suffix (-f): Output file suffix (default: .depth_scaled)"
-  echo "  --help (-h): Show this help"
+  echo "Usage: genome-coverage.sh [-i int] [-s samplesheet.csv] [-g hg38.chrom.sizes] " \
+       "[-o output/star_salmon] [-S scale-factors.txt] [-c 3] [-f .depth_scaled]"
+  echo "  -i: Index of sample in samplesheet (default: 1 or SLURM_ARRAY_TASK_ID+1 if present)"
+  echo "  -s: Samplesheet file (default: samplesheet.csv)"
+  echo "  -g: Genome chromosome sizes file (default: hg38.chrom.sizes)"
+  echo "  -o: Output folder where BAM files are located (default: output/star_salmon)"
+  echo "  -S: File containing scale factors (default: \$output/scale-factors.txt)"
+  echo "  -c: File containing scale factors (default: 3)"
+  echo "  -f: Output file suffix (default: .depth_scaled)"
+  echo "  -h: Show this help"
 }
 
 # Parsing arguments.
-if ! valid_args=$(getopt -o i:s:g:o:S:c:f:h --long index:,samplesheet:,genome:,output:,scales:,scales_column:,suffix:,help -- "$@")
-then
-  usage
-  exit 1
-fi
-
-eval set -- "$valid_args"
-while true
-do
-  case "$1" in
-    -i | --index)
-        index=$2
-        shift 2
-        ;;
-    -s | --samplesheet)
-        samplesheet=$2
-        shift 2
-        ;;
-    -g | --genome)
-        genome=$2
-        shift 2
-        ;;
-    -o | --output)
-        output=$2
-        shift 2
-        ;;
-    -S | --scales)
-        scales=$2
-        shift 2
-        ;;
-    -c | --scales_column)
-        scales_column=$2
-        shift 2
-        ;;
-    -f | --suffix)
-        suffix=$2
-        shift 2
-        ;;
-    -h | --help)
-        usage
-        exit 0
-        ;;
-    --) shift;
-        break
-        ;;
+while getopts 'i:s:g:o:S:c:f:h' OPTION; do
+  case "$OPTION" in
+    i)
+       index="$OPTARG"
+       ;;
+    s)
+       samplesheet="$OPTARG"
+       ;;
+    g)
+       genome="$OPTARG"
+       ;;
+    o)
+       output="$OPTARG"
+       ;;
+    S)
+       scales="$OPTARG"
+       ;;
+    c)
+       scales_column="$OPTARG"
+       ;;
+    f)
+       suffix="$OPTARG"
+       ;;
+    h)
+       usage
+       exit 0
+       ;;
+    :)
+       usage
+       exit 1
+       ;;
+    ?)
+       usage
+       exit 1
+       ;;
   esac
 done
 
@@ -99,37 +89,37 @@ fi
 # Validating arguments.
 if ! [[ "$index" =~ ^[0-9]+$ ]]
 then
-  >&2 echo "Error: --index parameter '$index' is not an integer."
+  >&2 echo "Error: -i parameter '$index' is not an integer."
   usage
   exit 1
 fi
 if ! [[ -f "$samplesheet" ]]
 then
-  >&2 echo "Error: --samplesheet file parameter '$samplesheet' does not exists."
+  >&2 echo "Error: -s file parameter '$samplesheet' does not exists."
   usage
   exit 1
 fi
 if ! [[ -f "$genome" ]]
 then
-  >&2 echo "Error: --genome file parameter '$genome' does not exists."
+  >&2 echo "Error: -g file parameter '$genome' does not exists."
   usage
   exit 1
 fi
 if ! [[ -d "$output" ]]
 then
-  >&2 echo "Error: --output folder parameter '$output' does not exists."
+  >&2 echo "Error: -o folder parameter '$output' does not exists."
   usage
   exit 1
 fi
 if ! [[ -f "$scales" ]]
 then
-  >&2 echo "Error: --scales file parameter '$scales' does not exists."
+  >&2 echo "Error: -S file parameter '$scales' does not exists."
   usage
   exit 1
 fi
 if ! [[ "$scales_column" =~ ^[0-9]+$ ]]
 then
-  >&2 echo "Error: --scales_column parameter '$scales_column' is not an integer."
+  >&2 echo "Error: -C parameter '$scales_column' is not an integer."
   usage
   exit 1
 fi
