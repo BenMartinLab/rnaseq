@@ -1,6 +1,6 @@
 # RNA-seq data analysis
 
-This repository contains scripts to analyse RNA-seq data using [nf-core pipeline](#https://nf-co.re/rnaseq) on Alliance Canada servers.
+This repository contains scripts to analyse RNA-seq data using [nf-core pipeline](https://nf-co.re/rnaseq) on Alliance Canada servers.
 
 To install the scripts on Alliance Canada servers and download genomes, see [INSTALL.md](INSTALL.md)
 
