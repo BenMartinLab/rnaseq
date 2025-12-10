@@ -2,7 +2,7 @@
 
 ### Steps
 
-1. [Prepare working environment](#Prepare working environment)
+1. [Prepare working environment](#Prepare-working-environment)
 2. [Installing of the scripts](#Installing-of-the-scripts)
    1. [Change directory to `projects` folder](#Change-directory-to-projects-folder)
    2. [Clone repository](#Clone-repository)
