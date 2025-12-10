@@ -26,6 +26,7 @@ You will need to transfer the following files on the server in the `scratch` fol
 
 * FASTQ files.
 * Genome files (FASTA and GTF). See [Genomes](https://github.com/BenMartinLab/genomes).
+  * Copy `star` folder for your genome.
 * Samplesheet file. See [Samplesheet for RNA-seq pipeline](https://nf-co.re/rnaseq/3.19.0/docs/usage/#samplesheet-input)
   * [Here is an example of a samplesheet file](samplesheet.csv)
 * Any additional files that are needed for your analysis.
@@ -129,7 +130,7 @@ Cheatsheet for tmux [https://tmuxcheatsheet.com](https://tmuxcheatsheet.com).
 From the tmux session, start the pipeline using the following command.
 
 ```shell
-nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf
+nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf --star_index star
 ```
 
 ## Run the nf-core pipeline on Fir
@@ -139,7 +140,7 @@ Please use Rorqual or Narval when possible because running nf-core pipelines on 
 You can still run the pipeline by using `sbatch` to run the nf-core pipeline on a compute node. The main issue of running the nf-core pipeline this way is that the output file will be difficult to read.
 
 ```shell
-sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf
+sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf --star_index star
 ```
 
 ## Computing scale factors
