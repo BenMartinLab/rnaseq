@@ -50,12 +50,6 @@ For Rorqual server, use
 export PATH=~/links/projects/def-bmartin/scripts/rnaseq:$PATH
 ```
 
-Load modules and virtual environment.
-
-```shell
-source nfcore-init.sh
-```
-
 ### Set additional variables
 
 > [!IMPORTANT]

@@ -10,10 +10,6 @@ then
   module load nextflow/25
   module load apptainer/1
 fi
-if [[ "beluga" == "$CC_CLUSTER" ]]
-then
-  ulimit -v 40000000
-fi
 
 export SLURM_ACCOUNT=def-bmartin
 export NXF_SINGULARITY_CACHEDIR=/project/def-bmartin/NXF_SINGULARITY_CACHEDIR
