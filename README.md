@@ -124,7 +124,12 @@ Cheatsheet for tmux [https://tmuxcheatsheet.com](https://tmuxcheatsheet.com).
 From the tmux session, start the pipeline using the following command.
 
 ```shell
-nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf --star_index star
+nfcore-rnaseq.sh -profile alliance_canada \
+    --input $samplesheet \
+    --outdir output \
+    --fasta $genome.fa \
+    --gtf $genome.gtf \
+    --star_index star
 ```
 
 ## Run the nf-core pipeline on Fir
@@ -134,13 +139,23 @@ Please use Rorqual or Narval when possible because running nf-core pipelines on 
 You can still run the pipeline by using `sbatch` to run the nf-core pipeline on a compute node. The main issue of running the nf-core pipeline this way is that the output file will be difficult to read.
 
 ```shell
-sbatch nfcore-rnaseq.sh -profile alliance_canada --input $samplesheet --outdir output --fasta $genome.fa --gtf $genome.gtf --star_index star
+sbatch nfcore-rnaseq.sh -profile alliance_canada \
+    --input $samplesheet \
+    --outdir output \
+    --fasta $genome.fa \
+    --gtf $genome.gtf \
+    --star_index star
 ```
 
 ## Computing scale factors
 
 ```shell
-sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salmon/scale-factors.txt --samplesheet $samplesheet --spike_fasta $spike.fa --mean
+sbatch scale-factors.sh \
+    --bam output/star_salmon/*.bam \
+    --output output/star_salmon/scale-factors.txt \
+    --samplesheet $samplesheet \
+    --spike_fasta $spike.fa \
+    --mean
 ```
 
 ## Genome coverage
@@ -148,13 +163,19 @@ sbatch scale-factors.sh --bam output/star_salmon/*.bam --output output/star_salm
 Genome coverage using scale factors based on sequencing depth. 
 
 ```shell
-sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --genome $genome.chrom.sizes
+sbatch --array=$samples_array genome-coverage.sh \
+    --samplesheet $samplesheet \
+    --genome $genome.chrom.sizes
 ```
 
 Genome coverage using spike-in scale factors.
 
 ```shell
-sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --genome $genome.chrom.sizes --scales_column 5 --suffix .spike_scaled
+sbatch --array=$samples_array genome-coverage.sh \
+    --samplesheet $samplesheet \
+    --genome $genome.chrom.sizes \
+    --scales_column 5 \
+    --suffix .spike_scaled
 ```
 
 ## Split BAM (Optional)
@@ -162,5 +183,7 @@ sbatch --array=$samples_array genome-coverage.sh --samplesheet $samplesheet --ge
 To split BAM files between main genome and spike-in genome, use the following command.
 
 ```shell
-sbatch --array=$samples_array split-bam.sh --samplesheet $samplesheet --spike $spike.fa
+sbatch --array=$samples_array split-bam.sh \
+    --samplesheet $samplesheet \
+    --spike $spike.fa
 ```
