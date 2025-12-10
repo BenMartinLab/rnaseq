@@ -2,13 +2,28 @@
 
 ### Steps
 
-1. [Installing of the scripts](#Installing-of-the-scripts)
+1. [Prepare working environment](#Prepare working environment)
+2. [Installing of the scripts](#Installing-of-the-scripts)
    1. [Change directory to `projects` folder](#Change-directory-to-projects-folder)
    2. [Clone repository](#Clone-repository)
-2. [Updating scripts](#Updating-scripts)
-3. [After installing or updating the scripts](#After-installing-or-updating-the-scripts)
+3. [Updating scripts](#Updating-scripts)
+4. [After installing or updating the scripts](#After-installing-or-updating-the-scripts)
    1. [Creating python virtual environment for nf-core](#Creating-python-virtual-environment-for-nf-core)
    2. [Downloading containers used by nf-core](#Downloading-containers-used-by-nf-core)
+
+## Prepare working environment
+
+Set rnaseq script folder.
+
+```shell
+rnaseq=~/projects/def-bmartin/scripts/rnaseq
+```
+
+For Rorqual server, use
+
+```shell
+rnaseq=~/links/projects/def-bmartin/scripts/rnaseq
+```
 
 ## Installing of the scripts
 
@@ -35,14 +50,7 @@ git clone https://github.com/BenMartinLab/rnaseq.git
 Go to the rnaseq scripts folder and run `git pull`.
 
 ```shell
-cd ~/projects/def-bmartin/scripts/rnaseq
-git pull
-```
-
-For Rorqual server, use
-
-```shell
-cd ~/links/projects/def-bmartin/scripts/rnaseq
+cd $rnaseq
 git pull
 ```
 
@@ -50,28 +58,22 @@ git pull
 
 After installing or updating the scripts, you may need to do the following steps.
 
-First, save the RNA-seq scripts folder location in a variable.
+Move to rnaseq scripts directory. See [Prepare working environment](#Prepare-working-environment).
 
 ```shell
-rnaseq_folder=~/projects/def-bmartin/scripts/rnaseq
-```
-
-For Rorqual server, use
-
-```shell
-rnaseq_folder=~/links/projects/def-bmartin/scripts/rnaseq
+cd $rnaseq
 ```
 
 ### Creating python virtual environment for nf-core
 
 ```shell
-bash $rnaseq_folder/nfcore-create-env.sh
+bash nfcore-create-env.sh
 ```
 
 ### Downloading containers used by nf-core
 
 ```shell
-bash $rnaseq_folder/nfcore-download-containers.sh
+bash nfcore-download-containers.sh
 ```
 
 ### Download bedGraphToBigWig
