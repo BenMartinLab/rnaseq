@@ -9,6 +9,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 1. [Choose server to use](#Choose-server-to-use)
 2. [Transfer data to scratch](#Transfer-data-to-scratch)
 3. [Prepare working environment](#Prepare-working-environment)
+   4. [Set additional variables](#Set-additional-variables)
 4. [Run the nf-core pipeline on Rorqual or Narval](#Run-the-nf-core-pipeline-on-Rorqual-or-Narval)
 5. [Run the nf-core pipeline on Fir](#Run-the-nf-core-pipeline-on-Fir)
 6. [Computing scale factors](#Computing-scale-factors)
@@ -54,7 +55,10 @@ Load modules and virtual environment.
 source nfcore-init.sh
 ```
 
-Set additional variables.
+### Set additional variables
+
+> [!IMPORTANT]
+> Change `samplesheet.csv` by your actual samplesheet filename.
 
 ```shell
 samplesheet=samplesheet.csv
@@ -64,11 +68,15 @@ samplesheet=samplesheet.csv
 samples_array=$(awk -F ',' 'NR > 1 && !seen[$1] {ln++; seen[$1]++} END {print "0-"ln-1}' "$samplesheet")
 ```
 
+> [!IMPORTANT]
+> Change `hg38-spike-dm6` by your actual genome name.
+
 ```shell
 genome=hg38-spike-dm6
 ```
 
-Set spike variable, if spike-in was used.
+> [!IMPORTANT]
+> Change `dm6` by your actual spike-in genome name.
 
 ```shell
 spike=dm6
