@@ -60,7 +60,9 @@ samplesheet=samplesheet.csv
 ```
 
 ```shell
-samples_array=$(awk -F ',' 'NR > 1 && !seen[$1] {ln++; seen[$1]++} END {print "0-"ln-1}' "$samplesheet")
+samples_array=$(awk -F ',' \
+    'NR > 1 && !seen[$1] {ln++; seen[$1]++} END {print "0-"ln-1}' \
+    "$samplesheet")
 ```
 
 > [!IMPORTANT]
