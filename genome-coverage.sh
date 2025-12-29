@@ -13,6 +13,7 @@ then
   module purge
   module load StdEnv/2023
   module load bedtools/2.31.0
+  module load kent_tools/486
   echo
 fi
 
