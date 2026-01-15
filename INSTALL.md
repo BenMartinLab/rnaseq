@@ -4,7 +4,7 @@
 
 1. [Prepare working environment](#Prepare-working-environment)
 2. [Installing of the scripts](#Installing-of-the-scripts)
-   1. [Change directory to `projects` folder](#Change-directory-to-projects-folder)
+   1. [Change directory to `project` folder](#Change-directory-to-project-folder)
    2. [Clone repository](#Clone-repository)
 3. [Updating scripts](#Updating-scripts)
 4. [After installing or updating the scripts](#After-installing-or-updating-the-scripts)
@@ -16,27 +16,15 @@
 Set rnaseq script folder.
 
 ```shell
-rnaseq=~/projects/def-bmartin/scripts/rnaseq
-```
-
-For Rorqual server, use
-
-```shell
-rnaseq=~/links/projects/def-bmartin/scripts/rnaseq
+rnaseq=/project/def-bmartin/scripts/rnaseq
 ```
 
 ## Installing of the scripts
 
-### Change directory to projects folder
+### Change directory to project folder
 
 ```shell
-cd ~/projects/def-bmartin/scripts
-```
-
-For Rorqual server, use
-
-```shell
-cd ~/links/projects/def-bmartin/scripts
+cd /project/def-bmartin/scripts
 ```
 
 ### Clone repository

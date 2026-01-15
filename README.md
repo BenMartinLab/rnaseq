@@ -35,13 +35,7 @@ There are many ways to transfer data to the server. Here are some suggestions.
 Add RNA-seq scripts folder to your PATH.
 
 ```shell
-export PATH=~/projects/def-bmartin/scripts/rnaseq:$PATH
-```
-
-For Rorqual server, use
-
-```shell
-export PATH=~/links/projects/def-bmartin/scripts/rnaseq:$PATH
+export PATH=/project/def-bmartin/scripts/rnaseq:$PATH
 ```
 
 ### Set additional variables
