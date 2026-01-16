@@ -11,5 +11,5 @@ nf-core pipelines download \
     --container-system singularity \
     --compress none \
     -d 6 \
-    -r 3.19.0 \
+    -r 3.22.2 \
     rnaseq

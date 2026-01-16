@@ -12,6 +12,6 @@ then
 fi
 source "${script_path}/nfcore-modules.sh"
 
-echo "Launching nf-core pipeline ${script_path}/nf-core-rnaseq_3.19.0/3_19_0"
-nextflow run "${script_path}/nf-core-rnaseq_3.19.0/3_19_0/" -c "${script_path}/nextflow.config" \
+echo "Launching nf-core pipeline ${script_path}/nf-core-rnaseq_3.22.2/3_22_2"
+nextflow run "${script_path}/nf-core-rnaseq_3.22.2/3_22_2/" -c "${script_path}/nextflow.config" \
     "$@"
