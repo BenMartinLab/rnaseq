@@ -137,8 +137,8 @@ def scale_factors(bam_files: list[TextIO], output_file: TextIO, spike_fasta_file
     for i in range(0, len(bam_files)):
         bam_file = bam_files[i]
         align = pysam.AlignmentFile(bam_file, "rb")
-        read_filter = lambda read : (read.is_proper_pair and not read.is_qcfail
-                                     and not read.is_secondary and not read.is_supplementary)
+        read_filter = lambda read : (((read.is_paired and read.is_proper_pair) or not read.is_paired)
+                                     and not read.is_qcfail and not read.is_secondary and not read.is_supplementary)
         read_count = align.count(read_callback=read_filter)
         spike_read_count = 0
         for chromosome in spike_chromosomes:
