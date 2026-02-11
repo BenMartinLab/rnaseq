@@ -82,7 +82,7 @@ To activate UMI deduplication, use the right parameters from the [usage page](ht
 > `sbatch` does not process `--umitools_umi_separator` parameter with one character properly. Please use the example for UMI in read name (using `--umitools_umi_separator=:` instead of `--umitools_umi_separator ":"`).
 
 ```shell
-umi_deduplication=--with_umi --skip_umi_extract --umitools_umi_separator=:
+umi_deduplication='--with_umi --skip_umi_extract --umitools_umi_separator=:'
 ```
 
 ## Run the nf-core pipeline
