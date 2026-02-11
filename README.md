@@ -9,6 +9,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 1. [Transfer data to scratch](#Transfer-data-to-scratch)
 2. [Prepare working environment](#Prepare-working-environment)
    1. [Set additional variables](#Set-additional-variables)
+   2. [UMI deduplication](#UMI-deduplication)
 3. [Run the nf-core pipeline](#Run-the-nf-core-pipeline)
 4. [Computing scale factors](#Computing-scale-factors)
 5. [Genome coverage](#Genome-coverage)
@@ -67,6 +68,23 @@ genome=hg38-spike-dm6
 spike=dm6
 ```
 
+### UMI deduplication
+
+To skip UMI deduplication, use an empty string for `umi_deduplication` variable.
+
+```shell
+umi_deduplication=
+```
+
+To activate UMI deduplication, use the right parameters from the [usage page](https://nf-co.re/rnaseq/3.22.2/docs/usage/#unique-molecular-identifiers-umi).
+
+> [!IMPORTANT]
+> `sbatch` does not process `--umitools_umi_separator` parameter with one character properly. Please use the example for UMI in read name (using `--umitools_umi_separator=:` instead of `--umitools_umi_separator ":"`).
+
+```shell
+umi_deduplication=--with_umi --skip_umi_extract --umitools_umi_separator=:
+```
+
 ## Run the nf-core pipeline
 
 ```shell
@@ -75,7 +93,8 @@ sbatch nfcore-rnaseq.sh -profile alliance_canada \
     --outdir output \
     --fasta $genome.fa \
     --gtf $genome.gtf \
-    --star_index star
+    --star_index star \
+    $umi_deduplication
 ```
 
 ## Computing scale factors
