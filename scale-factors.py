@@ -34,8 +34,6 @@ def main(argv: list[str] = None):
                         help="Tab delimited file containing multiple scale factor options  (default: standard output)")
     parser.add_argument("-s", "--spike_fasta", type=argparse.FileType('r'), default=None,
                         help="FASTA file containing spike-in genome")
-    parser.add_argument("-l", "--labels", nargs="*", default=None,
-                        help="Labels to use instead of BAM filename in BAM output column")
     parser.add_argument("--samplesheet", type=argparse.FileType('r'), default=None,
                         help="Sample sheet file where sample names will be used as labels")
     parser.add_argument("-S", "--scale", type=int, default=BASE_SCALE,
@@ -45,10 +43,7 @@ def main(argv: list[str] = None):
 
     args = parser.parse_args(argv)
 
-    if not args.labels and args.samplesheet:
-        args.labels = samplesheet_to_labels(args.samplesheet)
-
-    labels = bam_labels(bam_files=args.bam, labels=args.labels)
+    labels = bam_labels(bam_files=args.bam, labels=samplesheet_to_labels(args.samplesheet))
     scale_factors(bam_files=args.bam, output_file=args.output, spike_fasta_file=args.spike_fasta,
                   labels=labels, scale=args.scale, mean=args.mean)
 
