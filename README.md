@@ -85,6 +85,14 @@ To activate UMI deduplication, use the right parameters from the [usage page](ht
 umi_deduplication='--with_umi --skip_umi_extract --umitools_umi_separator=:'
 ```
 
+#### UMI at Plasmidsaurus
+
+Plasmidsaurus uses `_` as a separator in the read name.
+
+```shell
+umi_deduplication='--with_umi --skip_umi_extract --umitools_umi_separator=_'
+```
+
 ## Run the nf-core pipeline
 
 ```shell
