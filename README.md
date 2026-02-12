@@ -112,7 +112,6 @@ sbatch nfcore-rnaseq.sh -profile alliance_canada \
 
 ```shell
 sbatch scale-factors.sh \
-    --bam output/star_salmon/*.bam \
     --output output/star_salmon/scale-factors.txt \
     --samplesheet $samplesheet \
     --spike_fasta $spike.fa \
