@@ -81,6 +81,9 @@ To activate UMI deduplication, use the right parameters from the [usage page](ht
 > [!IMPORTANT]
 > `sbatch` does not process `--umitools_umi_separator` parameter with one character properly. Please use the example for UMI in read name (using `--umitools_umi_separator=:` instead of `--umitools_umi_separator ":"`).
 
+> [!NOTE]
+> Add `--save_umi_intermeds` parameter at the end of the `umi_deduplication` variable to get BAM files in the output folder.
+
 ```shell
 umi_deduplication='--with_umi --skip_umi_extract --umitools_umi_separator=: --save_umi_intermeds'
 ```
