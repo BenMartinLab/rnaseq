@@ -138,10 +138,14 @@ then
   exit 1
 fi
 
-bam="${output}/${sample}.markdup.sorted.bam"
+bam="${output}/${sample}.umi_dedup.sorted.bam"
 if [[ ! -f "$bam" ]]
 then
-  >&2 echo "Error: BAM file '${sample}.markdup.sorted.bam' does not exists in output folder '$output', exiting..."
+  bam="${output}/${sample}.markdup.sorted.bam"
+fi
+if [[ ! -f "$bam" ]]
+then
+  >&2 echo "Error: BAM file '${sample}.umi_dedup.sorted.bam' or '${sample}.markdup.sorted.bam' do not exists in output folder '$output', exiting..."
   exit 1
 fi
 
