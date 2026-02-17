@@ -1,4 +1,3 @@
-#### Parse script arguments ####
 library(GetoptLong)
 
 VERSION = "0.1.0"
@@ -26,11 +25,10 @@ GetoptLong(
 )
 
 stopifnot(!is.null(experiment), !is.null(control), !is.null(spike_gtf) || !spike_size_factors)
-dir.create(outdir, showWarnings = FALSE)
 
 
-#### Load required libraries ####
 library(rtracklayer)
+library(tidyr)
 library(tibble)
 library(dplyr)
 library(DESeq2)
@@ -49,7 +47,7 @@ condition_columns <- head(condition_columns, length(condition_columns) - 2)
 replica_column <- colnames(colData(dds))[length(condition_columns) + 2]
 metadata <- as.data.frame(colData(dds))
 metadata <- metadata |>
-  mutate(condition = paste(.data[[condition_columns]], sep="_"), .keep="unused")
+  unite(condition, all_of(condition_columns), sep = "_")
 colnames(metadata)[3] <- 'replica'
 metadata <- DataFrame(
   sample = metadata$sample,
