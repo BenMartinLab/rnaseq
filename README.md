@@ -14,6 +14,7 @@ To install the scripts on Alliance Canada servers and download genomes, see [INS
 4. [Computing scale factors](#Computing-scale-factors)
 5. [Genome coverage](#Genome-coverage)
 6. [Split BAM (Optional)](#Split-BAM-Optional)
+7. [DESeq2](#DESeq2)
 
 ## Transfer data to scratch
 
@@ -146,4 +147,28 @@ To split BAM files between main genome and spike-in genome, use the following co
 sbatch --array=$samples_array split-bam.sh \
     -s $samplesheet \
     -k $spike.fa
+```
+
+## DESeq2
+
+To see all available parameters.
+
+```shell
+deseq2.sh -h
+```
+
+To run DESeq2 analysis.
+
+> [!IMPORTANT]
+> Change the parameters to the ones you want to use. The example shows the must frequent parameters.
+
+```shell
+sbatch deseq2.sh \
+    --deseq output/star_salmon/deseq2_qc/deseq2.dds.RData \
+    --outdir output/star_salmon/deseq2 \
+    --experiment my_condition \
+    --control my_control \
+    --spike_gtf $spike.gtf \
+    --spike_size_factors \
+    --pre_filtering
 ```
