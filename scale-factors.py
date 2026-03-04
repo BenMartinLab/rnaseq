@@ -89,7 +89,7 @@ def scale_factors(bam_files: dict[str, str], output_file: TextIO, spike_fasta_fi
     :param scale: Base scale to use to compute scale factors
     :param mean: Divide scale factors by the mean of all scale factors
     """
-    spike_chromosomes = parse_chromosomes(spike_fasta_file) if spike_fasta_file else None
+    spike_chromosomes = parse_chromosomes(spike_fasta_file) if spike_fasta_file else []
 
     # Header
     output_file.write(f"BAM\tMain genome reads count\t"
