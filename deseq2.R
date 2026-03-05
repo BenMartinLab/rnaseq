@@ -27,6 +27,9 @@ GetoptLong(
 stopifnot(!is.null(experiment), !is.null(control), !is.null(spike_gtf) || !spike_size_factors)
 
 
+# Prevents creation of Rplots.pdf file.
+if(!interactive()) pdf(NULL)
+
 library(rtracklayer)
 library(tidyr)
 library(tibble)
