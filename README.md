@@ -157,6 +157,12 @@ To see all available parameters.
 deseq2.sh -h
 ```
 
+Create output directory.
+
+```shell
+mkdir output/star_salmon/deseq2
+```
+
 To run DESeq2 analysis.
 
 > [!IMPORTANT]
